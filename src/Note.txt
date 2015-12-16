@@ -1,0 +1,14 @@
+By default, if the server applied WebDAV feature for IIS, IIS does NOT alllow the Action PUT & DELETE and return HTTP code 405 (Method Not Allowed), because the default HttpModule named 'WebDAVModule' blocks them.
+As my test, the quick solution for the case is to add the configuration item in web.config as follow:
+
+<system.webServer>
+    <modules runAllManagedModulesForAllRequests="true">
+      <remove name="WebDAVModule"/>
+    </modules>
+
+    <handlers>
+       <remove name="WebDAV" />	
+   ...
+
+(WebDAVModule is for Distributed Authoring & Versioning.)
+
